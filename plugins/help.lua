@@ -18,7 +18,7 @@ function run(msg, matches)
 				file:flush()
 				file:close()
 				send_document(receiver, "./data/tmp/HelpSuper.txt", ok_cb, false)
-				return "Help of supergroup has been changed successful!"
+				return "➤ Help of supergroup has been changed successful!"
 			elseif type == chat then
 			    hash = "help:gp"
 				text = matches[2]
@@ -28,9 +28,9 @@ function run(msg, matches)
 				file:flush()
 				file:close()
 				send_document(receiver, "./data/tmp/HelpChat.txt", ok_cb, false)
-				return "Help of chat has been changed successful!"
+				return "➤ Help of chat has been changed successful!"
 			elseif type == "user" then
-			    return "Please use /sethelp commands in chat or supergroup!"
+			    return "➤ Please use /sethelp commands in chat or supergroup!"
 		    end
 		elseif is_owner(msg) then
 		    if is_group(msg) or is_super_group(msg) then
@@ -42,15 +42,15 @@ function run(msg, matches)
 				file:flush()
 				file:close()
 				send_document(receiver, "./data/tmp/HelpOwner.txt", ok_cb, false)
-				return "Help of your group has been changed successful!"
+				return "➤ Help of your group has been changed successful!"
 			elseif not is_group(msg) or not is_super_group(msg) then
 			    if type == channel then
-			        return "SuperGroup is not added!"
+			        return "➤ SuperGroup is not added!"
 				elseif type == chat then
-				    return "Group is not added!"
+				    return "➤ Group is not added!"
 				end
 			elseif type == "user" then
-			    return "Please use /sethelp commands in your chat or supergroup! (If you are an owner.)"
+			    return "➤ Please use /sethelp commands in your chat or supergroup! (If you are an owner.)"
 		    end
 		elseif is_momod(msg) or not is_momod(msg) then
 		    return "Just for sudo or owner!"
@@ -59,9 +59,9 @@ function run(msg, matches)
 	
 	if matches[1] == "help" then
 	    if not is_super_group(msg) and type == channel then
-		    return "SuperGroup is not added!"
+		    return "➲SuperGroup is not added!"
 		elseif not is_group(msg) and type == chat then
-		    return "Group is not added!"
+		    return "➲Group is not added!"
 		end
 	    if not is_momod(msg) and msg.to.type ~= "user" then
 		    return "You cant see /help text"
@@ -84,10 +84,10 @@ function run(msg, matches)
 			    return help
 		    elseif is_hash1 and is_hash2 then
 			    help = redis:get(hash2)
-				return help.."\n\n⚡️ [👉 Powered by "..team.." ] ⚡️\n📎 [👉 Join: "..channel.." ]"
+				return help.."\n\n➤ [➥ Powered by "..team.." ] ➤\n📎 [➠ Join: "..channel.." ]"
 			elseif not is_hash1 and is_hash2 then
 			    help = redis:get(hash2)
-				return help.."\n\n⚡️ [👉 Powered by "..team.." ] ⚡️\n📎 [👉 Join: "..channel.." ]"
+				return help.."\n\n➤ [➥ Powered by "..team.." ] ➤\n📎 [➠ Join: "..channel.." ]"
 			elseif not is_hash1 and not is_hash2 then
 			    local error = "Error! help text not found! please use /sethelp (text) or /setlang [en/fa/فا] for fix it."
 			    if msg.to.type == "channel" then
@@ -126,17 +126,17 @@ function run(msg, matches)
 			    if redis:get("help:sp") then
 			        hash = "help:sp"
 				    redis:del(hash)
-				    return "Help of supergroup has been removed!"
+				    return "➤ Help of supergroup has been removed!"
 				else
-				    return "Error! help not found, please set help text with /sethelp commands."
+				    return "➤ Error! help not found, please set help text with /sethelp commands."
 				end
 		    elseif type == chat then
 			    if redis:get("help:gp") then
 			        hash = "help:gp"
 				    redis:del(hash)
-				    return "Help of chat has been removed!"
+				    return "➤ Help of chat has been removed!"
 				else
-				    return "Error! help not found, please set help text with /sethelp commands."
+				    return "➤ Error! help not found, please set help text with /sethelp commands."
 				end
 			end
 		elseif is_owner(msg) then
@@ -146,24 +146,24 @@ function run(msg, matches)
 			        redis:del(hash)
 			        return "Help of your supergroup has been removed!"
 				else
-				    return "Error! help not found, please set help text with /sethelp commands."
+				    return "➤ Error! help not found, please set help text with /sethelp commands."
 				end
 			elseif type == chat and is_group(msg) then
 			    if redis:get("help:"..msg.to.id) then
 			        hash = "help:"..msg.to.id
 			        redis:del(hash)
-			        return "Help of your chat has been removed!"
+			        return "➤ Help of your chat has been removed!"
 				else
-				    return "Error! help not found, please set help text with /sethelp commands."
+				    return "➤ Error! help not found, please set help text with /sethelp commands."
 				end
 			end
 		elseif not is_momod(msg) then
-		    return "You cant remove help text! (Just for sudo)"
+		    return "➤ You cant remove help text! (Just for sudo)"
 		end
 	end
 end
 return {
-advan = "http://github.com/janlou/AdvanSource",
-patterns = {"^[!#/](help)$","^[!#/]([Ss]ethelp) (.*)$","^[!#/](delhelp)$"},
+jokerteam = "http://github.com/JookerTeam/jokersource",
+patterns = {"^[](help)$","^[]([Ss]ethelp) (.*)$","^[](delhelp)$"},
 run = run,
 }
